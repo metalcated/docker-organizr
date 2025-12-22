@@ -68,7 +68,7 @@ elif [[ -d /config/www/organizr/.git ]]; then
   git reset --hard origin/"$(cat /Docker.txt)"
   git pull
   git rev-parse HEAD >/config/www/organizr/Github.txt
-elif ! ping -c 1 https://github.com &>/dev/null; then
+elif ! ping -c 1 github.com &>/dev/null; then
   echo "Git clone failed, but github is resolvable"
 else
   echo "Git clone failed"
