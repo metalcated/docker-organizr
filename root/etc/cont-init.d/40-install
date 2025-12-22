@@ -36,7 +36,7 @@ if [[ $(grep -c "location /api/v2 {" /config/nginx/site-confs/default) -eq 0 ]];
   printf "Api location for api version 2 is not found.\nPlease visit https://organizr.app/v2-api and follow the instructions.\n"
 fi
 
-# Fetch site or update existing
+# Fetch site or update existing
 if [ "$branch" == "manual" ]; then
   echo "Skipping update"
 elif [[ ! -d /config/www/organizr/.git ]]; then
@@ -93,6 +93,15 @@ cp /Docker.txt /config/www/organizr/Docker.txt || (
   exit 0
 )
 
-# Set Permissions
+# Set up php-local.ini with recommended memory limit if not exists
+if [ ! -f /config/php/php-local.ini ]; then
+  echo '-------------------------'
+  echo '| Setting up PHP config |'
+  echo '-------------------------'
+  mkdir -p /config/php
+  cp /defaults/php-local.ini /config/php/php-local.ini
+fi
+
+# Set Permissions
 lsiown -R abc:abc \
   /config
