@@ -1,4 +1,4 @@
-#!/usr/bin/with-contenv bash
+#!/command/with-contenv bash
 # shellcheck shell=bash
 
 if [ "$branch" == "v2-develop" ] || [ "$branch" == "develop" ] || [ "$branch" == "dev" ]; then
@@ -93,15 +93,6 @@ cp /Docker.txt /config/www/organizr/Docker.txt || (
   echo 'Failed to move Docker flag, are you running with the updater disabled?'
   exit 0
 )
-
-# Set up php-local.ini with recommended memory limit if not exists
-if [ ! -f /config/php/php-local.ini ]; then
-  echo '-------------------------'
-  echo '| Setting up PHP config |'
-  echo '-------------------------'
-  mkdir -p /config/php
-  cp /defaults/php-local.ini /config/php/php-local.ini
-fi
 
 # Set Permissions
 lsiown -R abc:abc \
